@@ -37,13 +37,17 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             grid-template-rows: repeat(6, 1fr);
-            z-index: 1; /* 正文在下方层级 */
+            /* 不设置 z-index，避免整个 wrapper 盖过或低于图片层；单独让导航文字置顶 */
         }
 
         /* =========================================
            === 头部文字样式 (HEADER ROW) ===
            ========================================= */
         .header-text {
+            position: relative;
+            z-index: 30; /* 导航文字永远在 JPG/PNG 覆盖层上方 */
+            pointer-events: auto;
+
             font-family: "PingFang SC", "PingFangSC", "Helvetica Neue", Arial, sans-serif;
             font-weight: 600; /* Semibold */
             font-size: 15pt;
@@ -51,30 +55,23 @@
             margin: 0;
             line-height: 1;
             white-space: nowrap;
+            text-decoration: none;
             /* 对齐到第一行的顶部 */
             align-self: start; 
+        }
+
+        .header-text:not(.current-page) {
+            cursor: pointer;
+        }
+
+        .header-text:not(.current-page):hover {
+            color: #fff800 !important;
         }
 
         /* 第一行具体的列分配 */
         #header-proj { grid-column: 1 / 3; grid-row: 1; color: #b7b7b7; }
         #header-intro { grid-column: 7 / 8; grid-row: 1; color: #5e5e5e; }
         #header-working { grid-column: 10 / 12; grid-row: 1; color: #b7b7b7; }
-
-        /* =========================================
-           === Navigation Links ===
-           Project Name 和 Working Process 可点击跳转
-           当前页面 Intro 不设链接，也不会 hover 变色
-           ========================================= */
-        .header-text a {
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.15s ease;
-        }
-
-        .header-text:not(.current-page) a:hover {
-            color: #fff800;
-        }
 
         /* =========================================
            === 正文阅读模块 (TEXT MODULES) ===
@@ -150,13 +147,9 @@
 <body>
 
     <div id="wrapper">
-        <div id="header-proj" class="header-text">
-            <a href="https://antuyaran.github.io/homepage/">Project Name</a>
-        </div>
+        <a id="header-proj" class="header-text" href="https://antuyaran.github.io/homepage/">Project Name</a>
         <div id="header-intro" class="header-text current-page">Intro</div>
-        <div id="header-working" class="header-text">
-            <a href="https://antuyaran.github.io/workprocess/">Working Process</a>
-        </div>
+        <a id="header-working" class="header-text" href="https://antuyaran.github.io/workprocess/">Working Process</a>
 
         <div id="text-module-1" class="text-module">
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed nonummy luminara vestibus ordinarie fluens, in qua verba quasi mollia signa per paginam procedunt. Nulla facilisi. Praesent alique moderata, felis in tempor velum, nunc erat cursus sapien, vitae blandit lorem neque at arcu. Morbi sed ipsum vitae magna dictum varius, sed porta ligula elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer vel mauris non urna sollicitudin faucibus. Donec pretium, lacus at imperdiet tincidunt, neque ante aliquet sem, vitae convallis odio neque nec justo.</p>
