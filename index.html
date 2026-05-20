@@ -61,6 +61,22 @@
         #header-working { grid-column: 10 / 12; grid-row: 1; color: #b7b7b7; }
 
         /* =========================================
+           === Navigation Links ===
+           Project Name 和 Working Process 可点击跳转
+           当前页面 Intro 不设链接，也不会 hover 变色
+           ========================================= */
+        .header-text a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        .header-text:not(.current-page) a:hover {
+            color: #fff800;
+        }
+
+        /* =========================================
            === 正文阅读模块 (TEXT MODULES) ===
            ========================================= */
         .text-module {
@@ -134,9 +150,13 @@
 <body>
 
     <div id="wrapper">
-        <div id="header-proj" class="header-text">Project Name</div>
-        <div id="header-intro" class="header-text">Intro</div>
-        <div id="header-working" class="header-text">Working Process</div>
+        <div id="header-proj" class="header-text">
+            <a href="https://antuyaran.github.io/homepage/">Project Name</a>
+        </div>
+        <div id="header-intro" class="header-text current-page">Intro</div>
+        <div id="header-working" class="header-text">
+            <a href="https://antuyaran.github.io/workprocess/">Working Process</a>
+        </div>
 
         <div id="text-module-1" class="text-module">
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed nonummy luminara vestibus ordinarie fluens, in qua verba quasi mollia signa per paginam procedunt. Nulla facilisi. Praesent alique moderata, felis in tempor velum, nunc erat cursus sapien, vitae blandit lorem neque at arcu. Morbi sed ipsum vitae magna dictum varius, sed porta ligula elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer vel mauris non urna sollicitudin faucibus. Donec pretium, lacus at imperdiet tincidunt, neque ante aliquet sem, vitae convallis odio neque nec justo.</p>
