@@ -355,13 +355,39 @@
 
         let currentSyncTarget = null;
 
+        /*
+           Synchronisation fix:
+           The previous version used target.offsetTop directly. In this layout,
+           offsetTop can be calculated relative to the grid rather than the scrollable
+           text module, so the right column could jump slightly too far and cut off
+           the first one or two lines.
+
+           This version calculates the target position from real screen rectangles,
+           then leaves a small safe space above the refreshed auxiliary text.
+        */
+        const SYNC_TRIGGER_OFFSET = 3;   // respond when the left section is 3px from the top edge
+        const SYNC_SAFE_TOP_OFFSET = 28; // keep the refreshed right text 28px below the top edge
+
+        function getScrollTopForTarget(container, target, safeTopOffset = 0) {
+            const containerRect = container.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+
+            return Math.max(
+                0,
+                container.scrollTop + (targetRect.top - containerRect.top) - safeTopOffset
+            );
+        }
+
         function syncAuxiliaryText() {
             const moduleTop = mainTextModule.getBoundingClientRect().top;
             let activeSection = mainSections[0];
 
             for (const section of mainSections) {
                 const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop <= moduleTop + 8) {
+
+                // Trigger slightly before the section reaches the hard top edge,
+                // so neither column appears with its first line clipped.
+                if (sectionTop <= moduleTop + SYNC_TRIGGER_OFFSET) {
                     activeSection = section;
                 } else {
                     break;
@@ -371,11 +397,12 @@
             const syncNumber = activeSection.dataset.sync;
 
             // Only sync when the right column contains the same invisible number.
+            // The right column can still be scrolled independently by the reader.
             if (auxMap.has(syncNumber) && currentSyncTarget !== syncNumber) {
                 currentSyncTarget = syncNumber;
                 const target = auxMap.get(syncNumber);
                 auxTextModule.scrollTo({
-                    top: target.offsetTop,
+                    top: getScrollTopForTarget(auxTextModule, target, SYNC_SAFE_TOP_OFFSET),
                     behavior: 'auto'
                 });
             }
