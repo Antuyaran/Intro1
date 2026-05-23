@@ -14,6 +14,8 @@
             --main-text-color: #5e5e5e;
             --aux-text-color: #b7b7b7;
             --hover-color: #fff800;
+            --font-main: "AmericanTypewriter-Medium", "American Typewriter", serif;
+            --font-side: "American Typewriter Light Italic", "AmericanTypewriter-LightItalic", "American Typewriter", serif;
         }
 
         body, html {
@@ -51,8 +53,8 @@
             z-index: 30;
             pointer-events: auto;
 
-            font-family: "PingFang SC", "PingFangSC", "Helvetica Neue", Arial, sans-serif;
-            font-weight: 600;
+            font-family: var(--font-main);
+            font-weight: 500;
             font-size: 15pt;
             color: #b7b7b7;
             margin: 0;
@@ -109,20 +111,21 @@
             text-justify: none;
         }
 
-        /* 左侧主文本：PingFangSC Regular / 30pt / #5e5e5e */
+        /* 左侧主文本：AmericanTypewriter-Medium / 30pt / #5e5e5e */
         #text-module-1 p {
-            font-family: "PingFang SC", "PingFangSC-Regular", "Helvetica Neue", Arial, sans-serif;
-            font-weight: 400;
+            font-family: var(--font-main);
+            font-weight: 500;
             font-size: 30pt;
             line-height: 1.08;
             color: var(--main-text-color);
             margin-bottom: 42px;
         }
 
-        /* 右侧辅助文本：PingFangSC Regular / 20pt / #b7b7b7 */
+        /* 右侧辅助文本：American Typewriter Light Italic / 20pt / #b7b7b7 */
         #text-module-2 p {
-            font-family: "PingFang SC", "PingFangSC-Regular", "Helvetica Neue", Arial, sans-serif;
-            font-weight: 400;
+            font-family: var(--font-side);
+            font-weight: 300;
+            font-style: italic;
             font-size: 20pt;
             line-height: 1.12;
             color: var(--aux-text-color);
@@ -255,7 +258,7 @@
         <a id="header-working" class="header-text" href="https://antuyaran.github.io/workprocess/">Working Process</a>
 
         <div id="text-module-1" class="text-module">
-            <!-- MAIN TEXT START: left column / PingFangSC Regular / 30pt / #5e5e5e -->
+            <!-- MAIN TEXT START: left column / AmericanTypewriter-Medium / 30pt / #5e5e5e -->
             <section class="main-section" data-sync="1">
 <p>The Unquiet Page is a visual and interactive experiment about screen-based reading spaces.</p>
 </section>
@@ -287,7 +290,7 @@
         </div>
 
         <div id="text-module-2" class="text-module">
-            <!-- AUXILIARY TEXT START: right column / PingFangSC Regular / 20pt / #b7b7b7 -->
+            <!-- AUXILIARY TEXT START: right column / American Typewriter Light Italic / 20pt / #b7b7b7 -->
             <!-- The invisible data-sync numbers below correspond to the main text sections. -->
             <!-- Replace image paths at images/method1-1.jpg, images/method1-2.jpg, etc. -->
             <section class="aux-section" data-sync="1" id="aux-1">
