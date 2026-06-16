@@ -6,6 +6,38 @@
     <title>Dynamic Image Overlay Grid Layout</title>
     <style>
         /* =========================================
+           === Web Fonts for Raspberry Pi ===
+           这两个 @font-face 会优先读取树莓派本地已安装的字体；
+           如果本地字体名匹配不上，就从 GitHub 仓库同级目录加载字体文件。
+           请确保 index.html 与两个字体文件放在同一层：
+           American Typewriter Medium.ttf
+           AmericanTypewriter-LightItalic.otf
+           ========================================= */
+        @font-face {
+            font-family: "AT-Medium";
+            src:
+                local("AmericanTypewriter-Medium"),
+                local("VEIWDQ+AmericanTypewriter-Medium"),
+                url("./American%20Typewriter%20Medium.ttf") format("truetype");
+            font-weight: 500;
+            font-style: normal;
+            font-display: block;
+        }
+
+        @font-face {
+            font-family: "AT-LightItalic";
+            src:
+                local("AmericanTypewriterBQ-LightItalic"),
+                local("American Typewriter* Light Italic"),
+                local("American Typewriter Light Italic"),
+                local("AmericanTypewriter-LightItalic"),
+                url("./AmericanTypewriter-LightItalic.otf") format("opentype");
+            font-weight: 300;
+            font-style: italic;
+            font-display: block;
+        }
+
+        /* =========================================
            === 全局与基础样式 (GLOBAL & BASE) ===
            ========================================= */
         :root {
@@ -14,8 +46,8 @@
             --main-text-color: #5e5e5e;
             --aux-text-color: #b7b7b7;
             --hover-color: #fff800;
-            --font-main: "AmericanTypewriter-Medium", "American Typewriter", serif;
-            --font-side: "American Typewriter Light Italic", "AmericanTypewriter-LightItalic", "American Typewriter", serif;
+            --font-main: "AT-Medium", "AmericanTypewriter-Medium", "American Typewriter", serif;
+            --font-side: "AT-LightItalic", "AmericanTypewriterBQ-LightItalic", "American Typewriter Light Italic", "AmericanTypewriter-LightItalic", "American Typewriter", serif;
         }
 
         body, html {
